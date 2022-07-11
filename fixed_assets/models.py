@@ -16,7 +16,11 @@ class Ubicacion(models.Model):
         Planta 2
         Laboratorios
     """
-    pass
+    name = models.CharField(max_length=100)
+    
+    def __str__(self) -> str:
+        return f"{self.name}"
+
 
 class Area(models.Model):
     """
@@ -27,7 +31,11 @@ class Area(models.Model):
         Pre Ensamble
         null
     """
-    pass
+    name = models.CharField(max_length=100)
+    
+    def __str__(self) -> str:
+        return f"{self.name}"
+
 
 class Linea(models.Model):
     """
@@ -38,7 +46,11 @@ class Linea(models.Model):
         L3
         Calorimetros EM3
     """
-    pass
+    name = models.CharField(max_length=100)
+    
+    def __str__(self) -> str:
+        return f"{self.name}"
+
 
 class StatusActivo(models.Model):
     """
@@ -50,10 +62,31 @@ class StatusActivo(models.Model):
 
     Referencia: https://docs.google.com/spreadsheets/d/1hAmNRQb8-N3EoptTpiAcyhO_X-Qns3CV/edit?pli=1#gid=1404005117
     """
-    pass
+    status = models.CharField(max_length=50)
+    color = models.CharField(max_length=50) #color en hexadecimal
+
+    def __str__(self) -> str:
+        return f"{self.status} - {self.color}"
 
 class ActivoFijo(models.Model):
     """
     Modelo para manejar el activo fijo con todos sus campos.
     """
-    pass
+    consecutivo = models.CharField(max_length=100)
+    ubicacion = models.ForeignKey(Ubicacion, on_delete=models.DO_NOTHING, null=True, blank=True)
+    area = models.ForeignKey(Area, on_delete=models.DO_NOTHING, null=True, blank=True)
+    linea = models.ForeignKey(Linea, on_delete=models.DO_NOTHING, null=True, blank=True)
+    # funcional = models.CharField(max_length=60, null=True, blank=True)
+    n_activo_sap = models.CharField(max_length=100, null=True, blank=True)
+    n_pedimento = models.CharField(max_length=100, null=True, blank=True)
+    principal = models.CharField(max_length=100, null=True, blank=True)
+    descripcion = models.TextField(null=True, blank=True)
+    marca = models.CharField(max_length=100, null=True, blank=True)
+    modelo = models.CharField(max_length=120, null=True, blank=True)
+    n_serie = models.CharField(max_length=120, null=True, blank=True)
+    id_adicional = models.CharField(max_length=120, null=True, blank=True) # identificador adicional
+    año = models.DateField(null=True, blank=True)
+    pais_origen = models.CharField(max_length=50, null=True, blank=True)
+    
+    def __str__(self) -> str:
+        return f"{self.consecutivo} - {self.ubicacion} - {self.area} - {self.linea} - {self.n_activo_sap} - {self.n_pedimento} - {self.principal} - {self.descripcion} - {self.marca} - {self.modelo} - {self.n_serie} - {self.id_adicional} - {self.año} - {self.pais_origen}"
