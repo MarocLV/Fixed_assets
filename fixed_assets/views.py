@@ -86,6 +86,12 @@ class CreateActivoFijo(APIView):
             code = status.HTTP_400_BAD_REQUEST
         return Response(data, status = code)
         
-        
+
+class ListLastFiveActivoFijo(APIView):
+    
+    def get(self, request):
+        data = ActivoFijo.objects.all().order_by('-id')[:5].values()
+        print(data)
+        return Response(data)
         
         
