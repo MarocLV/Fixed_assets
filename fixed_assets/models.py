@@ -87,6 +87,7 @@ class ActivoFijo(models.Model):
     id_adicional = models.CharField(max_length=120, null=True, blank=True) # identificador adicional
     año = models.DateField(null=True, blank=True)
     pais_origen = models.CharField(max_length=50, null=True, blank=True)
+    is_consiliacion_completa = models.BooleanField(default=False)
     
     def __str__(self) -> str:
-        return f"{self.consecutivo} - {self.ubicacion} - {self.area} - {self.linea} - {self.n_activo_sap} - {self.n_pedimento} - {self.principal} - {self.descripcion} - {self.marca} - {self.modelo} - {self.n_serie} - {self.id_adicional} - {self.año} - {self.pais_origen}"
+        return f"{self.consecutivo} - {self.ubicacion} - {self.area} - {self.linea} - {self.n_activo_sap} - {self.n_pedimento} - {self.principal} - {self.descripcion} - {self.marca} - {self.modelo} - {self.n_serie} - {self.id_adicional} - {self.año} - {self.pais_origen} - {self.is_consiliacion_completa}"
