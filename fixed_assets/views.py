@@ -12,7 +12,7 @@ from .serializers import *
 class Ping(APIView):
     authentication_classes = (CsrfExemptSessionAuthentication, BasicAuthentication)
     def get(self, request):
-        return Response({'msg': 'Pong. API live'},status=status.HTTP_200_OK)
+        return Response({ "msg": "Pong", "status_code": 200 },status=status.HTTP_200_OK)
     
     
 class ListUbicacion(generics.ListAPIView):
